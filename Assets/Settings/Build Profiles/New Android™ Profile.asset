@@ -19,9 +19,7 @@ MonoBehaviour:
   m_PlatformBuildProfile:
     rid: 2288652217009308003
   m_OverrideGlobalSceneList: 0
-  m_Scenes:
-  - m_enabled: 1
-    m_path: Assets/Unity Technologies/QuizU - A UI Toolkit demo/Scenes/Boot.unity
+  m_Scenes: []
   m_ScriptingDefines:
   - MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
   m_PlayerSettingsYaml:
@@ -977,11 +975,11 @@ MonoBehaviour:
     - line: '|   captureStartupLogs: {}'
     - line: '|   activeInputHandler: 2'
     - line: '|   windowsGamepadBackendHint: 0'
-    - line: '|   cloudProjectId: d81c3217-2f89-4614-92fe-dc41915f958c'
+    - line: '|   cloudProjectId: '
     - line: '|   framebufferDepthMemorylessMode: 0'
     - line: '|   qualitySettingsNames: []'
     - line: '|   projectName: '
-    - line: '|   organizationId: vumanhha'
+    - line: '|   organizationId: '
     - line: '|   cloudEnabled: 0'
     - line: '|   legacyClampBlendShapeWeights: 0'
     - line: '|   hmiLoadingImage: {instanceID: 0}'
