@@ -6,6 +6,7 @@ namespace RPGDots.Scripts.Authoring
 {
     public class CharacterAuthoring : MonoBehaviour
     {
+        public float moveSpeed = 5f;
         public float hp = 100;
         public float attack = 10;
         public float defense = 5;
@@ -20,9 +21,11 @@ namespace RPGDots.Scripts.Authoring
                     Attack = authoring.attack,
                     Defense = authoring.defense
                 });
-                AddComponent(entity, new HealthComponent(){Value = authoring.hp});
+                AddComponent(entity, new HealthComponent() { Value = authoring.hp });
                 AddComponent(entity, new CharacterTag());
                 AddBuffer<BuffElement>(entity);
+                AddComponent(entity, new MoveSpeedComponent() { Value = authoring.moveSpeed });
+                AddComponent(entity, new NearestEnemy());
             }
         }
     }
