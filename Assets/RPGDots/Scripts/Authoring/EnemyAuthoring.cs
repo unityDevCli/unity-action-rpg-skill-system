@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace RPGDots.Scripts.Authoring
 {
-    public class CharacterAuthoring : MonoBehaviour
+    public class EnemyAuthoring : MonoBehaviour
     {
         public float hp = 100;
         public float attack = 10;
-        public float defense = 5;
+        public float defense = 0;
 
-        private class CharacterAuthoringBaker : Baker<CharacterAuthoring>
+        private class EnemyAuthoringBaker : Baker<EnemyAuthoring>
         {
-            public override void Bake(CharacterAuthoring authoring)
+            public override void Bake(EnemyAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent(entity, new StatComponent()
@@ -21,8 +21,8 @@ namespace RPGDots.Scripts.Authoring
                     Attack = authoring.attack,
                     Defense = authoring.defense
                 });
-                AddComponent(entity, new CharacterTag());
-                AddBuffer<BuffElement>(entity);
+
+                AddComponent(entity, new EnemyTag());
             }
         }
     }
