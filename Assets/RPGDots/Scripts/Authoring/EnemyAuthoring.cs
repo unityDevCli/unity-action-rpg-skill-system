@@ -17,11 +17,10 @@ namespace RPGDots.Scripts.Authoring
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent(entity, new StatComponent()
                 {
-                    Hp = authoring.hp,
                     Attack = authoring.attack,
                     Defense = authoring.defense
                 });
-
+                AddComponent(entity, new HealthComponent() { Value = authoring.hp });
                 AddComponent(entity, new EnemyTag());
             }
         }

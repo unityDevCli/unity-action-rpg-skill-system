@@ -17,8 +17,8 @@ namespace RPGDots.Scripts.Systems
             foreach (var (request, entity) in SystemAPI.Query<RefRO<SkillCastRequest>>().WithEntityAccess())
             {
                 var target = FindTarget(ref state);
-                var stats = SystemAPI.GetComponentRW<StatComponent>(target);
-                stats.ValueRW.Hp -= request.ValueRO.Damage;
+                var health = SystemAPI.GetComponentRW<HealthComponent>(target);
+                health.ValueRW.Value -= request.ValueRO.Damage;
                 state.EntityManager.DestroyEntity(entity);
             }
         }
