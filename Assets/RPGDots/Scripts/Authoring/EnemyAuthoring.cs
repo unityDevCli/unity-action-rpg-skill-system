@@ -19,20 +19,15 @@ namespace RPGDots.Scripts.Authoring
         [Header("Set up for ranged only")] public float desireRange = 8f;
         public float rangeTolerance = 0.7f;
 
+        public float fireInterval = 0.9f;
+
         public float hp = 100;
-        public float attack = 10;
-        public float defense = 0;
 
         private class EnemyAuthoringBaker : Baker<EnemyAuthoring>
         {
             public override void Bake(EnemyAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new StatComponent()
-                {
-                    Attack = authoring.attack,
-                    Defense = authoring.defense
-                });
 
                 if (authoring.type == EnemyType.Melee)
                 {
@@ -51,6 +46,11 @@ namespace RPGDots.Scripts.Authoring
                 AddComponent(entity, new MoveSpeedComponent() { Value = authoring.moveSpeed });
                 AddComponent(entity, new HealthComponent() { Value = authoring.hp });
                 AddComponent(entity, new EnemyTag());
+                AddComponent(entity, new FireCoolDown()
+                {
+                    Timer = 0f,
+                    Interval = authoring.fireInterval
+                });
             }
         }
     }

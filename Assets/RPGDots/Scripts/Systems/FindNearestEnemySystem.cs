@@ -9,17 +9,12 @@ namespace RPGDots.Scripts.Systems
     public partial struct FindNearestEnemySystem : ISystem
     {
         private EntityQuery _enemyQuery;
-        private EntityQuery _playerQuery;
 
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             _enemyQuery = state.GetEntityQuery(ComponentType.ReadOnly<EnemyTag>(),
                 ComponentType.ReadOnly<LocalTransform>());
-
-            _playerQuery = state.GetEntityQuery(ComponentType.ReadOnly<CharacterTag>(),
-                ComponentType.ReadOnly<LocalTransform>(),
-                ComponentType.ReadWrite<NearestEnemy>());
         }
 
         [BurstCompile]
@@ -30,12 +25,11 @@ namespace RPGDots.Scripts.Systems
             var enemyEntities = _enemyQuery.ToEntityArray(state.WorldUpdateAllocator);
             var enemyTransforms = _enemyQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
 
-            var nearestJob = new NearestJob()
+            state.Dependency = new NearestJob()
             {
                 EnemyEntities = enemyEntities,
                 EnemyTransforms = enemyTransforms
-            };
-            state.Dependency = nearestJob.ScheduleParallel(_playerQuery, state.Dependency);
+            }.ScheduleParallel(state.Dependency);
         }
 
         [BurstCompile]
