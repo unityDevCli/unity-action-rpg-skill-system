@@ -1,6 +1,7 @@
 ﻿using System;
 using RPG.Scripts.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace RPG.Scripts.Enemy
@@ -8,12 +9,15 @@ namespace RPG.Scripts.Enemy
     public class EnemySpawner : MonoBehaviour
     {
         [Header("Spawn Settings")] [SerializeField]
-        protected GameObject enemyPrefab;
+        protected GameObject meleeEnemyPrefab;
+
+        [SerializeField] protected GameObject rangedEnemyPrefab;
 
         [SerializeField] protected Transform[] spawnPoints;
 
         [SerializeField] protected float spawnInterval = 1.5f;
         [SerializeField] protected float maxAlive = 20f;
+        [Range(0f, 1f)] [SerializeField] private float rangedChance = 0.35f;
 
         [Header("Target Player")] [SerializeField]
         protected Transform targetPlayer;
@@ -28,8 +32,8 @@ namespace RPG.Scripts.Enemy
 
         private void Update()
         {
-            if (enemyPrefab == null || spawnPoints == null) return;
             if (targetPlayer == null) return;
+            if (spawnPoints is not { Length: > 0 }) return;
 
             if (Time.time >= _nextSpawnTime)
             {
@@ -41,8 +45,10 @@ namespace RPG.Scripts.Enemy
         private void SpawnOne()
         {
             var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            var obj = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            var enemyAI = obj.GetComponent<EnemyAI>();
+            var spawnRanged = Random.value < rangedChance;
+            var prefab = spawnRanged ? rangedEnemyPrefab : meleeEnemyPrefab;
+            var obj = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            var enemyAI = obj.GetComponent<BaseEnemyAI>();
             if (enemyAI != null) enemyAI.SetTarget(targetPlayer);
 
             var hp = obj.GetComponent<Health>();
