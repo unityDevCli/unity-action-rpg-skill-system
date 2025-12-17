@@ -29,28 +29,28 @@ namespace RPGDots.Scripts.Authoring
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-                if (authoring.type == EnemyType.Melee)
-                {
-                    AddComponent(entity, new EnemyMeleeTag());
-                }
-                else
-                {
-                    AddComponent(entity, new EnemyRangedTag());
-                    AddComponent(entity, new DesireRange()
-                    {
-                        Value = authoring.desireRange,
-                        Tolerance = authoring.rangeTolerance
-                    });
-                }
-
+                // if (authoring.type == EnemyType.Melee)
+                // {
+                //     AddComponent(entity, new EnemyMeleeTag());
+                // }
+                // else
+                // {
+                //     AddComponent(entity, new EnemyRangedTag());
+                //     AddComponent(entity, new DesireRange()
+                //     {
+                //         Value = authoring.desireRange,
+                //         Tolerance = authoring.rangeTolerance
+                //     });
+                // }
+                Debug.Log("EnemyAuthoring");
                 AddComponent(entity, new MoveSpeedComponent() { Value = authoring.moveSpeed });
                 AddComponent(entity, new HealthComponent() { Value = authoring.hp });
                 AddComponent(entity, new EnemyTag());
-                AddComponent(entity, new FireCoolDown()
-                {
-                    Timer = 0f,
-                    Interval = authoring.fireInterval
-                });
+                // AddComponent(entity, new FireCoolDown()
+                // {
+                //     Timer = 0f,
+                //     Interval = authoring.fireInterval
+                // });
             }
         }
     }
