@@ -26,6 +26,7 @@ namespace RPG.Scripts
             if (_playerEntity == Entity.Null || !_entityManager.Exists(_playerEntity))
             {
                 if (_entityQuery.IsEmptyIgnoreFilter) return;
+                if (_entityQuery.CalculateEntityCount() != 1) return;
                 _playerEntity = _entityQuery.GetSingletonEntity();
             }
 
