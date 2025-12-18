@@ -1,5 +1,6 @@
 ﻿using RPG.Scripts.ComponentData;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace RPG.Scripts.Authoring
@@ -16,6 +17,7 @@ namespace RPG.Scripts.Authoring
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent(entity, new HealthComponent() { Value = authoring.hp });
                 AddComponent(entity, new MoveSpeedComponent() { Value = authoring.moveSpeed });
+                AddComponent(entity, new PlayerInputData() { MoveInput = float2.zero });
                 AddComponent(entity, new PlayerTag());
             }
         }
