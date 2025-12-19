@@ -19,7 +19,7 @@ namespace RPG.Scripts.Authoring
                 AddComponent(entity, new MoveSpeedComponent() { Value = authoring.moveSpeed });
                 AddComponent(entity, new PlayerInputData() { MoveInput = float2.zero });
                 AddComponent(entity, new PlayerTag());
-            }
+            } 
         }
     }
 }
