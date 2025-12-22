@@ -21,7 +21,7 @@ namespace RPG.Scripts
                 ComponentType.ReadOnly<LocalTransform>());
         }
 
-        private void LateUpdate()
+        private void LateUpdate() 
         {
             if (_playerEntity == Entity.Null || !_entityManager.Exists(_playerEntity))
             {
